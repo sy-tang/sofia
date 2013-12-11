@@ -1,43 +1,40 @@
 define ['../core/Vector', '../core/Color', '../core/Particle'], (Vector2, Color, Particle) ->
-	class Emitter
-		constructor: (opt) ->
-			@pos = opt.pos || new Vector2(0, 0)
-			@originPos = @pos.copy()
-			@velocity = opt.velocity || new Vector2(0, 0)
-			@spread = opt.spread || Math.PI / 32  # possible angles = velocity.angle +/- spread
-			@emissionRate = opt.emissionRate || 1
+    class Emitter
+        constructor: (opt) ->
+            @pos = opt.pos || new Vector2(0, 0)
+            @originPos = @pos.copy()
+            @velocity = opt.velocity || new Vector2(0, 0)
+            @spread = opt.spread || Math.PI / 32  # possible angles = velocity.angle +/- spread
+            @emissionRate = opt.emissionRate || 1
 
-			@drawColor = opt.drawColor || Color.red
-			@minLife = opt.minLife || 5
-			@maxLife = opt.maxLife || 40
-			@minSize = opt.minSize || 5
-			@maxSize = opt.maxSize || 10
+            @drawColor = opt.drawColor || Color.red
+            @minLife = opt.minLife || 5
+            @maxLife = opt.maxLife || 40
+            @minSize = opt.minSize || 5
+            @maxSize = opt.maxSize || 10
 
-		emitParticle: ->
-			@float() if @applyFloat
-			@mouse() if @applyMouse
+        emitParticle: ->
+            @float() if @applyFloat
+            @mouse() if @applyMouse
 
-			angle = @velocity.angle() + @spread - (Math.random() * @spread * 2)
+            angle = @velocity.angle() + @spread - (Math.random() * @spread * 2)
 
-			opt =
-				pos: @pos.copy()
-				velocity: Vector2.fromAngle(angle, @velocity.length())
-				life: @minLife + Math.random() * (@maxLife - @minLife)
-				size: @minSize + Math.random() * (@maxSize - @maxSize)
+            opt =
+                pos: @pos.copy()
+                velocity: Vector2.fromAngle(angle, @velocity.length())
+                life: @minLife + Math.random() * (@maxLife - @minLife)
+                size: @minSize + Math.random() * (@maxSize - @maxSize)
 
-			new Particle(opt)
+            new Particle(opt)
 
-		float: ->
-			@pos.y += Math.random() * 20 - 10
-			maxHeight = window.innerHeight
-			@pos.y = maxHeight / 2 if (@pos.y > maxHeight || @pos.y < 0)
+        float: ->
+            @pos.y += Math.random() * 20 - 10
+            maxHeight = window.innerHeight
+            @pos.y = maxHeight / 2 if (@pos.y > maxHeight || @pos.y < 0)
 
-		mouse: ->
-			@pos = window.newMousePostion if window.newMousePostion
+        mouse: ->
+            @pos = window.newMousePostion if window.newMousePostion
 
-		reset: ->
-			@pos = @orignPos.copy()
-			@applyMouse = @applyFloat = false
-
-
-
+        reset: ->
+            @pos = @orignPos.copy()
+            @applyMouse = @applyFloat = false
