@@ -3,7 +3,7 @@ define [], () ->
 	class Color
 		constructor: (@r = 0, @g = 0, @b = 0) ->
 
-		copy: -> 
+		copy: ->
 			new Color(@r, @g, @b)
 
 		add: (c) ->

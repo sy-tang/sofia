@@ -26,7 +26,7 @@ define ['../core/Vector', '../core/Color', '../core/Particle', '../core/Emitter'
 			for emitter in @emitters
 				for count in [0..emitter.emissionRate]
 					@particles.push emitter.emitParticle()
-			return 
+			return
 
 		simulate: ->
 			@aging() if not @stopAging
@@ -37,8 +37,8 @@ define ['../core/Vector', '../core/Color', '../core/Particle', '../core/Emitter'
 		render: () ->
 			@ctx.fillStyle = @blurOn ? 'rgba(0, 0, 0, 0.1)' : 'black'
 			@ctx.fillRect(0, 0, @canvas.width, @canvas.height)
-			p.render(@ctx) for p in @particles			
-			return 
+			p.render(@ctx) for p in @particles
+			return
 
 		addEffector: (effector) ->
 			@effectors.push(effector)
@@ -52,9 +52,9 @@ define ['../core/Vector', '../core/Color', '../core/Particle', '../core/Emitter'
 				p = @particles[i]
 				p.age += @dt
 				if p.age >= p.life
-					@kill(i) 
+					@kill(i)
 				else i++
-			return 
+			return
 
 		kill: (i) ->
 			len = @particles.length

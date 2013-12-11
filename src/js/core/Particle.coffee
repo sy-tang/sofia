@@ -1,5 +1,5 @@
-define ['../core/Vector', '../core/Color'], (Vector2, Color) ->	
-	class Particle	
+define ['../core/Vector', '../core/Color'], (Vector2, Color) ->
+	class Particle
 		constructor: (options) ->
 			@pos = options.pos || Vector2.zero
 			@velocity = options.velocity || Vector.zero
@@ -27,7 +27,7 @@ define ['../core/Vector', '../core/Color'], (Vector2, Color) ->
 			# update velocity
 			@velocity = @velocity.add @acceleration.multiply(dt)
 
-		
+
 
 
 

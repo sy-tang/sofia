@@ -2,7 +2,7 @@ define ['../core/Vector', '../core/Color', '../core/Particle'], (Vector2, Color,
 	class Emitter
 		constructor: (opt) ->
 			@pos = opt.pos || new Vector2(0, 0)
-			@originPos = @pos.copy()	
+			@originPos = @pos.copy()
 			@velocity = opt.velocity || new Vector2(0, 0)
 			@spread = opt.spread || Math.PI / 32  # possible angles = velocity.angle +/- spread
 			@emissionRate = opt.emissionRate || 1
@@ -18,8 +18,8 @@ define ['../core/Vector', '../core/Color', '../core/Particle'], (Vector2, Color,
 			@mouse() if @applyMouse
 
 			angle = @velocity.angle() + @spread - (Math.random() * @spread * 2)
-			
-			opt = 
+
+			opt =
 				pos: @pos.copy()
 				velocity: Vector2.fromAngle(angle, @velocity.length())
 				life: @minLife + Math.random() * (@maxLife - @minLife)
@@ -37,7 +37,7 @@ define ['../core/Vector', '../core/Color', '../core/Particle'], (Vector2, Color,
 
 		reset: ->
 			@pos = @orignPos.copy()
-			@applyMouse = @applyFloat = false 
+			@applyMouse = @applyFloat = false
 
 
 
