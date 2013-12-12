@@ -1,4 +1,8 @@
-define ['../core/Vector', '../core/Color', '../core/Particle'], (Vector2, Color, Particle) ->
+define (require) ->
+    Color = require('./Color')
+    Vector2 = require('./Vector2')
+    Particle = require('./Particle')
+
     class Emitter
         constructor: (opt) ->
             @pos = opt.pos || new Vector2(0, 0)

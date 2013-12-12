@@ -1,5 +1,9 @@
-define(['../core/Vector', '../core/Color', '../core/Particle', '../core/Emitter'], function(Vector2, Color, Particle, Emitter) {
-  var ParticleSystem;
+define(function(require) {
+  var Color, Emitter, Particle, ParticleSystem, Vector2;
+  Color = require('./Color');
+  Vector2 = require('./Vector2');
+  Emitter = require('./Emitter');
+  Particle = require('./Particle');
   return ParticleSystem = (function() {
     function ParticleSystem(canvas, opt) {
       if (opt == null) {

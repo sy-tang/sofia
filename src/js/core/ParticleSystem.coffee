@@ -1,4 +1,9 @@
-define ['../core/Vector', '../core/Color', '../core/Particle', '../core/Emitter'], (Vector2, Color, Particle, Emitter) ->
+define (require) ->
+    Color = require('./Color')
+    Vector2 = require('./Vector2')
+    Emitter = require('./Emitter')
+    Particle = require('./Particle')
+
     class ParticleSystem
         constructor: (canvas, opt = {}) ->
             @canvas = canvas

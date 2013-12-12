@@ -1,9 +1,10 @@
-require [
-    'core/Vector'
-    'core/Emitter'
-    'core/ParticleSystem'
-    'lib/requestAnimationFrame'
-], (Vector2, Emitter, ParticleSystem) ->
+define (require) ->
+    Vector2 = require('core/Vector2')
+    Emitter = require('core/Emitter')
+    ParticleSystem = require('core/ParticleSystem')
+
+    require('lib/requestAnimationFrame')
+
     canvas = document.getElementById('main')
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight

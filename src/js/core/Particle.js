@@ -1,5 +1,7 @@
-define(['../core/Vector', '../core/Color'], function(Vector2, Color) {
-  var Particle;
+define(function(require) {
+  var Color, Particle, Vector2;
+  Color = require('./Color');
+  Vector2 = require('./Vector2');
   return Particle = (function() {
     function Particle(options) {
       this.pos = options.pos || Vector2.zero;

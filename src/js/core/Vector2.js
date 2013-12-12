@@ -1,4 +1,4 @@
-define([], function() {
+define(function() {
   var Vector2;
   return Vector2 = (function() {
     function Vector2(x, y) {

@@ -1,5 +1,5 @@
 # Color: r,g,b -> [0, 255]
-define [], () ->
+define () ->
     class Color
         constructor: (@r = 0, @g = 0, @b = 0) ->
 

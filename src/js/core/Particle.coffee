@@ -1,4 +1,7 @@
-define ['../core/Vector', '../core/Color'], (Vector2, Color) ->
+define (require) ->
+    Color = require('./Color')
+    Vector2 = require('./Vector2')
+
     class Particle
         constructor: (options) ->
             @pos = options.pos || Vector2.zero

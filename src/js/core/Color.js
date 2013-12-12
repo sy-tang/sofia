@@ -1,4 +1,4 @@
-define([], function() {
+define(function() {
   var Color;
   return Color = (function() {
     function Color(r, g, b) {

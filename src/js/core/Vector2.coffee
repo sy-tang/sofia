@@ -1,4 +1,4 @@
-define [], () ->
+define () ->
     class Vector2
         constructor: (@x = 0, @y = 0) ->
 
