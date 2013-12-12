@@ -2,12 +2,12 @@
 
 dir='sofia'
 if [ $1 ]; then
-    dir="$1"
+    dir=$1
 fi
 
-git clone ssh://git@bd.ysmood.org:8022/music-fe/sofia.git "$dir"
+git clone ssh://git@bd.ysmood.org:8022/music-fe/sofia.git $dir
 
-cd "$dir"/lib
+cd $dir/lib
 
 npm install
 
