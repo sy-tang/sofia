@@ -27,7 +27,7 @@ define (require) ->
                 pos: @pos.copy()
                 velocity: Vector2.fromAngle(angle, @velocity.length())
                 life: @minLife + Math.random() * (@maxLife - @minLife)
-                size: @minSize + Math.random() * (@maxSize - @maxSize)
+                size: @minSize + Math.random() * (@maxSize - @minSize)
 
             new Particle(opt)
 
