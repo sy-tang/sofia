@@ -9,7 +9,7 @@ define (require) ->
             @canvas = canvas
             @ctx = canvas.getContext('2d')
 
-            @gravity = opt.gravity or new Vector2(0, 10)
+            @gravity = opt.gravity or new Vector2(0, 1)
             @gravityOn = opt.gravityOn || false
             @stopAging = opt.stopAging || false
             @effectors = []
@@ -36,7 +36,7 @@ define (require) ->
         simulate: ->
             @aging() if not @stopAging
             @applyGravity() if @gravityOn
-            @applyfectors() if @effectorsOn
+            @applyEffectors() if @effectorsOn
             @kinematics()
 
         render: () ->
@@ -62,6 +62,7 @@ define (require) ->
             return
 
         kill: (i) ->
+            console.log('kill')
             len = @particles.length
             if len > 1
                 @particles[i] = @particles[len - 1]

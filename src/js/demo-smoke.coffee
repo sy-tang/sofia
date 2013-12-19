@@ -1,9 +1,8 @@
 define (require) ->
     Vector2 = require('core/Vector2')
-    SnowEmitter = require('extend/snow/SnowEmitter')
-    SnowEffector = require('extend/snow/SnowEffector')
+    SmokeEmitter = require('extend/smoke/SmokeEmitter')
+    ChamberBox = require('extend/ChamberBox')
     ParticleSystem = require('core/ParticleSystem')
-
     stats = require('lib/stats')
 
     require('lib/requestAnimationFrame')
@@ -16,24 +15,24 @@ define (require) ->
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
 
+    midX = canvas.width / 2
+    midY = canvas.height / 2
+
     ps = new ParticleSystem(canvas, {
-            dt: 0.08
+            maxParticles: 200
             effectorsOn: true
-            gravityOn: true
-            maxParticles: 300
+            stopAging: true
         })
 
-    # add SnowEmitter to make snow flakes in the system
-    ps.addEmitter(new SnowEmitter({
-            minSize: 1
-            maxSize: 5
-            minLife: 20
-            maxLife: 80
-            emissionRate: 1
+    ps.addEffector(new ChamberBox(0, 0, canvas.width, canvas.height))
+
+    ps.addEmitter(new SmokeEmitter({
+            pos: new Vector2(midX, midY)
+            velocity: new Vector2(-20, 0)
+            spread: Math.PI
+            emissionRate: 60
         })
     )
-
-    ps.addEffector(new SnowEffector())
 
     do () ->
         stats.begin()
