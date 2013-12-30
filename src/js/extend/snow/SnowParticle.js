@@ -14,11 +14,14 @@ define(function(require) {
     }
 
     SnowParticle.prototype.render = function(ctx) {
-      var alpha, scale;
-      scale = alpha = (1 - this.age / this.life).toFixed(2);
+      var gradient;
       ctx.save();
-      ctx.fillStyle = "rgba(" + this.color.r + ", " + this.color.g + ", " + this.color.b + ", " + alpha + ")";
       ctx.translate(this.pos.x, this.pos.y);
+      gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+      gradient.addColorStop(0, "rgba(255, 255, 255, 0.9)");
+      gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.5)");
+      gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+      ctx.fillStyle = gradient;
       ctx.beginPath();
       ctx.arc(0, 0, this.size, 0, Math.PI * 2, true);
       ctx.closePath();

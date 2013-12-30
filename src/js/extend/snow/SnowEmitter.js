@@ -19,11 +19,10 @@ define(function(require) {
     SnowEmitter.prototype.emitParticle = function() {
       var opt;
       opt = {
-        pos: new Vector2(window.innerWidth - Math.random() * window.innerWidth * 1.5, Math.random() * -500),
-        velocity: new Vector2(2 - Math.random() * 4, 10),
+        pos: new Vector2(window.innerWidth - Math.random() * window.innerWidth * 1.5, Math.random() * -100),
+        velocity: new Vector2(2 - Math.random() * 4, 15 + Math.random() * 10),
         life: this.minLife + Math.random() * (this.maxLife - this.minLife),
-        size: this.minSize + Math.random() * (this.maxSize - this.minSize),
-        color: new Color(255, 255, 255)
+        size: this.minSize + Math.random() * (this.maxSize - this.minSize)
       };
       return new SnowParticle(opt);
     };

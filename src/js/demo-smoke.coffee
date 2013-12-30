@@ -6,6 +6,7 @@ define (require) ->
     stats = require('lib/stats')
 
     require('lib/requestAnimationFrame')
+    require('/bower_components/dat.gui/dat.gui.min.js')
 
     canvas = document.getElementById('main')
     canvas.width = window.innerWidth
@@ -17,6 +18,8 @@ define (require) ->
 
     midX = canvas.width / 2
     midY = canvas.height / 2
+
+    window.showCenter = false
 
     ps = new ParticleSystem(canvas, {
             maxParticles: 200
@@ -33,6 +36,11 @@ define (require) ->
             emissionRate: 60
         })
     )
+
+    # add control panel
+    gui = new dat.GUI()
+    gui.add(window, 'showCenter')
+
 
     do () ->
         stats.begin()

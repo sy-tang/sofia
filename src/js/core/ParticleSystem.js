@@ -58,14 +58,16 @@ define(function(require) {
     };
 
     ParticleSystem.prototype.render = function() {
-      var p, _i, _len, _ref, _ref1;
-      this.ctx.fillStyle = (_ref = this.blurOn) != null ? _ref : {
-        'rgba(0, 0, 0, 0.1)': 'black'
-      };
+      var p, _i, _len, _ref;
+      if (this.blurOn) {
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      } else {
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+      }
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      _ref1 = this.particles;
-      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-        p = _ref1[_i];
+      _ref = this.particles;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        p = _ref[_i];
         p.render(this.ctx);
       }
     };

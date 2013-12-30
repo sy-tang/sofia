@@ -40,7 +40,10 @@ define (require) ->
             @kinematics()
 
         render: () ->
-            @ctx.fillStyle = @blurOn ? 'rgba(0, 0, 0, 0.1)' : 'black'
+            if(@blurOn)
+                @ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
+            else
+                @ctx.fillStyle = 'rgba(0, 0, 0, 1)'
             @ctx.fillRect(0, 0, @canvas.width, @canvas.height)
             p.render(@ctx) for p in @particles
             return

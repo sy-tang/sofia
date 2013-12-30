@@ -7,6 +7,7 @@ define (require) ->
     stats = require('lib/stats')
 
     require('lib/requestAnimationFrame')
+    require('/bower_components/dat.gui/dat.gui.min.js')
 
     canvas = document.getElementById('main')
     canvas.width = window.innerWidth
@@ -19,14 +20,14 @@ define (require) ->
     ps = new ParticleSystem(canvas, {
             dt: 0.08
             effectorsOn: true
-            gravityOn: true
-            maxParticles: 300
+            maxParticles: 500
+            stopAging: true
         })
 
     # add SnowEmitter to make snow flakes in the system
     ps.addEmitter(new SnowEmitter({
             minSize: 1
-            maxSize: 5
+            maxSize: 8
             minLife: 20
             maxLife: 80
             emissionRate: 1

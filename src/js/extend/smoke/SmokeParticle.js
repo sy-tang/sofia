@@ -23,12 +23,14 @@ define(function(require) {
       ctx.save();
       if (imageLoaded) {
         ctx.drawImage(imageObj, this.pos.x - 128, this.pos.y - 128);
-        return;
+        if (!showCenter) {
+          return;
+        }
       }
       ctx.fillStyle = "rgba(255, 0, 0, 1)";
       ctx.translate(this.pos.x, this.pos.y);
       ctx.beginPath();
-      ctx.arc(0, 0, this.size, 0, Math.PI * 2, true);
+      ctx.arc(0, 0, 5, 0, Math.PI * 2, true);
       ctx.closePath();
       ctx.fill();
       return ctx.restore();

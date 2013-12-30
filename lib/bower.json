@@ -9,6 +9,7 @@
   ],
   "dependencies": {
     "requirejs": "~2.1.9",
-    "stats.js": "*"
+    "stats.js": "*",
+    "dat.gui": "*"
   }
 }

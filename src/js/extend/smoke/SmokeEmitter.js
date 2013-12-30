@@ -16,6 +16,8 @@ define(function(require) {
       return _ref;
     }
 
+    SmokeEmitter.showCenter = false;
+
     SmokeEmitter.prototype.emitParticle = function() {
       var angle, opt;
       angle = this.velocity.angle() + this.spread - (Math.random() * this.spread * 2);

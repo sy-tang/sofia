@@ -16,6 +16,7 @@ define(function(require) {
       this.maxLife = opt.maxLife || 40;
       this.minSize = opt.minSize || 5;
       this.maxSize = opt.maxSize || 10;
+      this.applyMouse = false;
     }
 
     Emitter.prototype.emitParticle = function() {
@@ -46,13 +47,14 @@ define(function(require) {
     };
 
     Emitter.prototype.mouse = function() {
-      if (window.newMousePostion) {
-        return this.pos = window.newMousePostion;
+      if (window.newMousePosition) {
+        return this.pos = window.newMousePosition;
       }
     };
 
     Emitter.prototype.reset = function() {
-      this.pos = this.orignPos.copy();
+      console.log('reset');
+      this.pos = this.originPos.copy();
       return this.applyMouse = this.applyFloat = false;
     };
 

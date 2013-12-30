@@ -17,6 +17,8 @@ define (require) ->
             @minSize = opt.minSize || 5
             @maxSize = opt.maxSize || 10
 
+            @applyMouse = false
+
         emitParticle: ->
             @float() if @applyFloat
             @mouse() if @applyMouse
@@ -37,8 +39,9 @@ define (require) ->
             @pos.y = maxHeight / 2 if (@pos.y > maxHeight || @pos.y < 0)
 
         mouse: ->
-            @pos = window.newMousePostion if window.newMousePostion
+            @pos = window.newMousePosition if window.newMousePosition
 
         reset: ->
-            @pos = @orignPos.copy()
+            console.log 'reset'
+            @pos = @originPos.copy()
             @applyMouse = @applyFloat = false

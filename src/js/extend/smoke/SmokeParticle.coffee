@@ -18,11 +18,12 @@ define (require) ->
             ctx.save()
             if(imageLoaded)
                 ctx.drawImage(imageObj, @pos.x-128, @pos.y-128)
-                return
+                if(!showCenter)
+                    return
             ctx.fillStyle = "rgba(255, 0, 0, 1)"
             ctx.translate(@pos.x, @pos.y)
             ctx.beginPath()
-            ctx.arc(0, 0, @size, 0, Math.PI * 2, true)
+            ctx.arc(0, 0, 5, 0, Math.PI * 2, true)
             ctx.closePath()
             ctx.fill()
             ctx.restore()

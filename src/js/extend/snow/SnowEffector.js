@@ -7,7 +7,9 @@ define(function(require) {
     SnowEffector.prototype.apply = function(particle) {
       particle.velocity.x += (1 - Math.random() * 2) / 10;
       if (particle.pos.x > window.innerWidth || particle.pos.y > window.innerHeight) {
-        return particle.age = particle.life;
+        particle.pos.x = window.innerWidth - Math.random() * window.innerWidth * 1.5
+        particle.pos.y = Math.random() * -100
+        particle.velocity.y = 15 + Math.random() * 10;
       }
     };
 
