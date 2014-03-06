@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    display: block;
+}
+
+
+/* custom dat.gui panel */
+.dg.a {
+    float: left !important;
+    width: 300px!important;
+}
+
+
+/* custom stats board */
+#stats {
+    left: auto !important;
+    right: 0 !important;
+    width: 120px !important;
+}

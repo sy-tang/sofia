@@ -1,16 +1,18 @@
 define (require) ->
+
     Color = require('./Color')
     Vector2 = require('./Vector2')
 
     class Particle
         constructor: (options) ->
-            @pos = options.pos || Vector2.zero
-            @velocity = options.velocity || Vector.zero
-            @acceleration = options.acceleration || Vector2.zero
+            @pos = options.pos || Vector2.zero.clone()
+            @velocity = options.velocity || Vector.zero.clone()
+            @acceleration = options.acceleration || Vector2.zero.clone()
             @life = options.life || 10
             @age = options.age || 0
             @color = options.color || Color.random()
             @size = options.size || 1
+
 
         render: (ctx) ->
             alpha = (1 - @age / @life).toFixed(2)
@@ -26,6 +28,7 @@ define (require) ->
         move: (dt) ->
             dt = dt || 1
             # update position
-            @pos = @pos.add @velocity.multiply(dt)
+            @pos.add @velocity.multiply(dt)
+
             # update velocity
-            @velocity = @velocity.add @acceleration.multiply(dt)
+            @velocity.add @acceleration.multiply(dt)

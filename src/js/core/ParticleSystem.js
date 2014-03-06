@@ -18,7 +18,7 @@ define(function(require) {
       this.effectors = [];
       this.effectorsOn = opt.effectorsOn || false;
       this.particles = [];
-      this.maxParticles = opt.maxParticles || 500;
+      this.maxParticles = opt.maxParticles || 100;
       this.dt = opt.dt || 0.1;
       this.blurOn = opt.blurOn || false;
       this.emitters = [];
@@ -31,16 +31,14 @@ define(function(require) {
     };
 
     ParticleSystem.prototype.emit = function() {
-      var count, emitter, _i, _j, _len, _ref, _ref1;
+      var emitter, _i, _len, _ref;
       if (this.particles.length > this.maxParticles) {
         return;
       }
       _ref = this.emitters;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         emitter = _ref[_i];
-        for (count = _j = 0, _ref1 = emitter.emissionRate; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; count = 0 <= _ref1 ? ++_j : --_j) {
-          this.particles.push(emitter.emitParticle());
-        }
+        emitter.emitParticles(this.particles);
       }
     };
 
@@ -58,7 +56,7 @@ define(function(require) {
     };
 
     ParticleSystem.prototype.render = function() {
-      var p, _i, _len, _ref;
+      var e, p, _i, _j, _len, _len1, _ref, _ref1;
       if (this.blurOn) {
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
       } else {
@@ -69,6 +67,11 @@ define(function(require) {
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         p = _ref[_i];
         p.render(this.ctx);
+      }
+      _ref1 = this.emitters;
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        e = _ref1[_j];
+        e.render(this.ctx);
       }
     };
 
@@ -109,7 +112,7 @@ define(function(require) {
       _ref = this.particles;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         p = _ref[_i];
-        p.acceleration = this.gravity;
+        p.acceleration.add(this.gravity);
       }
     };
 
@@ -127,11 +130,16 @@ define(function(require) {
     };
 
     ParticleSystem.prototype.kinematics = function() {
-      var p, _i, _len, _ref;
+      var e, p, _i, _j, _len, _len1, _ref, _ref1;
       _ref = this.particles;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         p = _ref[_i];
         p.move(this.dt);
+      }
+      _ref1 = this.emitters;
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        e = _ref1[_j];
+        e.move(this.dt);
       }
     };
 

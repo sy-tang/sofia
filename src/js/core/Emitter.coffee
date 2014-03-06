@@ -1,4 +1,7 @@
 define (require) ->
+
+    Util = require('./extend')
+
     Color = require('./Color')
     Vector2 = require('./Vector2')
     Particle = require('./Particle')
@@ -6,42 +9,71 @@ define (require) ->
     class Emitter
         constructor: (opt) ->
             @pos = opt.pos || new Vector2(0, 0)
-            @originPos = @pos.copy()
             @velocity = opt.velocity || new Vector2(0, 0)
-            @spread = opt.spread || Math.PI / 32  # possible angles = velocity.angle +/- spread
-            @emissionRate = opt.emissionRate || 1
+            @spread = opt.spread || 0   # degree -> [0, 360]
+            @emissionRate = opt.emissionRate || 0
 
+            @display = opt.display || false   # show the emitter
             @drawColor = opt.drawColor || Color.red
-            @minLife = opt.minLife || 5
-            @maxLife = opt.maxLife || 40
-            @minSize = opt.minSize || 5
-            @maxSize = opt.maxSize || 10
 
-            @applyMouse = false
+            @particleProto = ({
+                    life: [5, 20]
+                    size: [5, 10]
+                }).extend(opt.particleProto)
 
-        emitParticle: ->
-            @float() if @applyFloat
-            @mouse() if @applyMouse
 
-            angle = @velocity.angle() + @spread - (Math.random() * @spread * 2)
+        emitOne: ->
 
-            opt =
-                pos: @pos.copy()
-                velocity: Vector2.fromAngle(angle, @velocity.length())
-                life: @minLife + Math.random() * (@maxLife - @minLife)
-                size: @minSize + Math.random() * (@maxSize - @minSize)
+            rand = Util.rand
+
+            opt = Util.clone(@particleProto)
+
+            opt.life = rand(opt.life)
+            opt.size = rand(opt.size)
+
+            if !opt.pos
+                opt.pos = @pos.clone()
+
+            if opt.posVariance
+                variance = opt.posVariance
+                opt.pos.add(new Vector2(rand(variance), rand(variance)))
+
+            if opt.velocity
+                opt.velocity.rotate(@spread*Math.random())
 
             new Particle(opt)
 
-        float: ->
-            @pos.y += Math.random() * 20 - 10
-            maxHeight = window.innerHeight
-            @pos.y = maxHeight / 2 if (@pos.y > maxHeight || @pos.y < 0)
+        emitParticles: (pool) ->
+            count = @emissionRate
+            debugger
+            while count > 0
+                pool.push( @emitOne() )
+                count--
+            return
 
-        mouse: ->
-            @pos = window.newMousePosition if window.newMousePosition
+        update: (opt) ->
+            @.extend(opt)
 
-        reset: ->
-            console.log 'reset'
-            @pos = @originPos.copy()
-            @applyMouse = @applyFloat = false
+        move: (dt) ->
+            dt = dt || 1
+            # update position
+            @pos.add @velocity.multiply(dt)
+
+        render: (ctx) ->
+            if @display
+                ctx.save()
+                ctx.fillStyle = "rgba(#{@drawColor.r}, #{@drawColor.g}, #{@drawColor.b}, 1)"
+                ctx.translate(@pos.x, @pos.y)
+                ctx.beginPath()
+                ctx.arc(0, 0, 5, 0, Math.PI * 2, true)
+                ctx.closePath()
+                ctx.fill()
+                ctx.beginPath()
+                ctx.fillStyle = '#000'
+                ctx.arc(0, 0, 2, 0, Math.PI * 2, true)
+                ctx.closePath()
+                ctx.fill()
+                ctx.restore()
+
+
+

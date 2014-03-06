@@ -15,7 +15,7 @@ define (require) ->
             @effectors = []
             @effectorsOn = opt.effectorsOn || false
             @particles = []
-            @maxParticles = opt.maxParticles || 500
+            @maxParticles = opt.maxParticles || 100
             @dt = opt.dt || 0.1
             @blurOn = opt.blurOn || false
 
@@ -29,8 +29,7 @@ define (require) ->
         emit: ->
             return if @particles.length > @maxParticles
             for emitter in @emitters
-                for count in [0..emitter.emissionRate]
-                    @particles.push emitter.emitParticle()
+                emitter.emitParticles(@particles)
             return
 
         simulate: ->
@@ -45,7 +44,9 @@ define (require) ->
             else
                 @ctx.fillStyle = 'rgba(0, 0, 0, 1)'
             @ctx.fillRect(0, 0, @canvas.width, @canvas.height)
+
             p.render(@ctx) for p in @particles
+            e.render(@ctx) for e in @emitters
             return
 
         addEffector: (effector) ->
@@ -73,7 +74,7 @@ define (require) ->
 
         applyGravity: () ->
             for p in @particles
-                p.acceleration = @gravity
+                p.acceleration.add(@gravity);
             return
 
         applyEffectors: () ->
@@ -83,6 +84,7 @@ define (require) ->
             return
 
         kinematics: () ->
-            for p in @particles
-                p.move(@dt)
+            p.move(@dt) for p in @particles
+            e.move(@dt) for e in @emitters
+
             return
