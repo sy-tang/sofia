@@ -6,6 +6,6 @@ $ bower install
 $ nobone
 ```
 
-Open browser, visit: http://localhost:8013
+Open browser, visit: **http://localhost:8013**
 
-Effect Preset: http://localhost:8013/effects.html
+Effect Preset: **http://localhost:8013/effects.html**
