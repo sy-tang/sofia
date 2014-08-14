@@ -21,15 +21,14 @@ define (require) ->
             dt: 0.08
             effectorsOn: true
             maxParticles: 500
-            stopAging: true
         })
 
     # add SnowEmitter to make snow flakes in the system
     ps.addEmitter(new SnowEmitter({
             minSize: 1
             maxSize: 8
-            minLife: 20
-            maxLife: 80
+            minLife: 180
+            maxLife: 180
             emissionRate: 1
         })
     )

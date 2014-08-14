@@ -6,7 +6,7 @@ define (require) ->
     class Particle
         constructor: (options) ->
             @pos = options.pos || Vector2.zero.clone()
-            @velocity = options.velocity || Vector.zero.clone()
+            @velocity = options.velocity || Vector2.zero.clone()
             @acceleration = options.acceleration || Vector2.zero.clone()
             @life = options.life || 10
             @age = options.age || 0

@@ -8,6 +8,7 @@ define (require) ->
 
     imageObj.onload = () ->
         imageLoaded = true
+        console.log imageObj
 
     # Once the callback is arranged then set the source of the image
     imageObj.src = "../../../img/smoke.png"

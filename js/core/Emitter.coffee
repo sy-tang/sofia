@@ -8,6 +8,8 @@ define (require) ->
 
     class Emitter
         constructor: (opt) ->
+            @_opt = opt
+            
             @pos = opt.pos || new Vector2(0, 0)
             @velocity = opt.velocity || new Vector2(0, 0)
             @spread = opt.spread || 0   # degree -> [0, 360]
@@ -45,7 +47,6 @@ define (require) ->
 
         emitParticles: (pool) ->
             count = @emissionRate
-            debugger
             while count > 0
                 pool.push( @emitOne() )
                 count--

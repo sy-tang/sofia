@@ -8,8 +8,8 @@ define (require) ->
     class SmokeEmitter extends Emitter
         # 是否显示每团烟雾的中心
         @showCenter: false
-        # just need to override emitParticle() to simulate smoke
-        emitParticle: ->
+        # just need to override emitOne() to simulate smoke
+        emitOne: ->
             angle = @velocity.angle() + @spread - (Math.random() * @spread * 2)
 
             opt =
